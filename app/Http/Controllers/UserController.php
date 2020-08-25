@@ -58,7 +58,7 @@ class UserController extends Controller
         DB::beginTransaction();
         try {
             //code...
-            $role = Role::findById($request->role);
+
             $new_user = User::create([
                 'fullname' => $request->fullname,
                 'dob' => $request->dob,
@@ -68,14 +68,22 @@ class UserController extends Controller
                 'password' => bcrypt($request->password),
             ]);
             DB::commit();
-
-            $user = User::get()->where('email', $request->email);
-            $user->assignRole($role);
             alert()->success('Success!', 'Thêm Nhân Viên Thành Công');
 
         } catch (\Throwable $th) {
             DB::rollback();
             alert()->error('Oops..!', 'Có lỗi xảy ra. Vui lòng thử lại');
+        }
+        $role = Role::findById($request->role);
+        $user = User::where('email', $request->email)->first();
+
+        try {
+            $user->assignRole($role->name);
+            DB::commit();
+            alert()->success('Success!', 'Thêm chức vụ cho người dùng thành công.');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            alert()->error('Oops..!', 'Đã có lỗi xảy ra khi thêm chức vụ. Vui lòng thêm lại sau');
         }
 
         return redirect()->route('them_nhan_vien');
