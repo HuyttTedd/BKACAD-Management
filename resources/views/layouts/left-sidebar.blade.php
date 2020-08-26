@@ -37,39 +37,35 @@
                 </li>
 
                 <li class="has_sub">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="dripicons-archive"></i> <span> Quản Lý Nhân Viên </span> <span class="menu-arrow float-right"><i
+                    <a href="javascript:void(0);" class="waves-effect"><i class="dripicons-archive"></i> <span> Quản Lý
+                            Nhân Viên </span> <span class="menu-arrow float-right"><i
                                 class="mdi mdi-chevron-right"></i></span></a>
                     <ul class="list-unstyled">
                         <li><a href="{{ route('them_nhan_vien') }}">Thêm Nhân Viên</a></li>
-                        <li><a href="advanced-rating.html">Rating</a></li>
-                        <li><a href="advanced-nestable.html">Nestable</a></li>
-                        <li><a href="advanced-rangeslider.html">Range Slider</a></li>
-                        <li><a href="advanced-sweet-alert.html">Sweet-Alert</a></li>
-                        <li><a href="advanced-lightbox.html">Lightbox</a></li>
+                        <li><a href="{{ route('danh_sach_nhan_vien') }}">Danh Sách Nhân Viên</a></li>
                     </ul>
                 </li>
 
                 <li class="has_sub">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="dripicons-rocket"></i> <span> Icons
+                    <a href="javascript:void(0);" class="waves-effect"><i class="dripicons-rocket"></i> <span> Quản Lí
+                            Học Viện
                         </span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                     <ul class="list-unstyled">
-                        <li><a href="icons-material.html">Material Design</a></li>
-                        <li><a href="icons-ion.html">Ion Icons</a></li>
-                        <li><a href="icons-fontawesome.html">Font Awesome</a></li>
-                        <li><a href="icons-themify.html">Themify Icons</a></li>
-                        <li><a href="icons-dripicons.html">Dripicons</a></li>
-                        <li><a href="icons-typicons.html">Typicons Icons</a></li>
+                        <li><a href="{{ route('them_khoa') }}">Thêm Khóa</a></li>
+                        <li><a href="{{ route('them_nganh') }}">Thêm Ngành</a></li>
+                        <li><a href="{{ route('them_nganh_cho_khoa') }}">Thêm Ngành Cho Khóa</a></li>
+                        <li><a href="{{ route('them_mon') }}">Thêm Môn</a></li>
                     </ul>
                 </li>
 
                 <li>
-                    <a href="calendar.html" class="waves-effect"><i class="dripicons-calendar"></i><span> Calendar
+                    <a href="calendar.html" class="waves-effect"><i class="dripicons-calendar"></i><span> Điểm Danh
                         </span></a>
                 </li>
 
                 <li class="has_sub">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="dripicons-document"></i><span> Forms
-                        </span> <span class="badge badge-warning badge-pill float-right">8</span></a>
+                    <a href="javascript:void(0);" class="waves-effect"><i class="dripicons-document"></i><span> Quản Lí Sinh Viên
+                    </span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                     <ul class="list-unstyled">
                         <li><a href="form-elements.html">Form Elements</a></li>
                         <li><a href="form-validation.html">Form Validation</a></li>

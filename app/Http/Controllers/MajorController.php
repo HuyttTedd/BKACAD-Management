@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Major;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MajorController extends Controller
 {
@@ -14,7 +15,9 @@ class MajorController extends Controller
      */
     public function index()
     {
-        //
+        $majors = Major::all();
+
+        return view('course_major.view_major', compact('majors'));
     }
 
     /**
@@ -24,7 +27,8 @@ class MajorController extends Controller
      */
     public function create()
     {
-        //
+        return view('course_major.add_major');
+
     }
 
     /**
@@ -35,7 +39,27 @@ class MajorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validateData = $request->validate([
+            'major_id' => ['required', 'unique:majors,id'],
+            'major_name' => ['required'],
+        ]);
+
+        DB::beginTransaction();
+
+        try {
+            $major = Major::create([
+                'id' => $request->major_id,
+                'major_name' => $request->major_name,
+            ]);
+            DB::commit();
+            alert()->success('Success!', 'Thêm khóa học mới thành công');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            alert()->error('Oop..!', 'Đã có lỗi xảy ra. Vui lòng thử lại sau');
+            return redirect()->back();
+        }
+        return redirect()->route('xem_nganh');
+
     }
 
     /**

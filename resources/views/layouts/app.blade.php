@@ -13,6 +13,8 @@
 
         <!-- morris css -->
         {{-- <link rel="stylesheet" href="../plugins/morris/morris.css"> --}}
+        <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
+
 
         <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet" type="text/css">
@@ -68,6 +70,8 @@
         <script src="{{ asset('assets/js/waves.js') }}"></script>
         <script src="{{ asset('assets/js/jquery.nicescroll.js') }}"></script>
         <script src="{{ asset('assets/js/jquery.scrollTo.min.js') }}"></script>
+
+        <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 
         {{-- <script src="../plugins/morris/morris.min.js"></script>
         <script src="../plugins/raphael/raphael.min.js"></script>

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Major;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CourseController extends Controller
 {
@@ -14,7 +16,9 @@ class CourseController extends Controller
      */
     public function index()
     {
-        //
+        $courses = Course::all();
+
+        return view('course_major.view_course', compact('courses'));
     }
 
     /**
@@ -24,7 +28,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        return view('course_major.add_course');
     }
 
     /**
@@ -35,7 +39,54 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validateData = $request->validate([
+            'course' => ['required', 'unique:courses,course_name'],
+        ]);
+
+        DB::beginTransaction();
+
+        try {
+            $course = Course::create([
+                'course_name' => $request->course,
+            ]);
+            DB::commit();
+            alert()->success('Success!', 'Thêm khóa học mới thành công');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            alert()->error('Oop..!', 'Đã có lỗi xảy ra. Vui lòng thử lại sau');
+            return redirect()->back();
+        }
+        return redirect()->route('xem_khoa');
+
+    }
+
+    public function viewAddMajorToCourse()
+    {
+        $courses = Course::all();
+
+        $majors = Major::all();
+
+        return view('course_major.add_major_to_course', compact(['courses', 'majors']));
+    }
+
+    public function addMajorToCourse(Request $request)
+    {
+        $course = Course::find($request->course);
+
+        $majors = $request->major;
+
+        DB::beginTransaction();
+        try {
+            $course->majors()->sync($majors);
+            DB::commit();
+            alert()->success('Success');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            alert()->error('Oop..!');
+            return redirect()->back();
+        }
+
+        return redirect()->route('khoa_chi_tiet');
     }
 
     /**
@@ -44,9 +95,11 @@ class CourseController extends Controller
      * @param  \App\Models\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function show(Course $course)
+    public function showDetails()
     {
-        //
+        $courses = Course::all();
+
+        return view('course_major.view_course_detail', compact('courses'));
     }
 
     /**

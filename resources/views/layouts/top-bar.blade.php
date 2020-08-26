@@ -120,11 +120,11 @@
             <li class="list-inline-item dropdown notification-list d-none d-sm-inline-block">
                 <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#"
                     role="button" aria-haspopup="false" aria-expanded="false">
-                    Create New <i class="mdi mdi-plus"></i>
+                    Thêm Mới <i class="mdi mdi-plus"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-animated">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="{{ route('them_khoa') }}">Khóa</a>
+                    <a class="dropdown-item" href="{{ route('them_nganh') }}">Ngành</a>
                     <a class="dropdown-item" href="#">Something else here</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Separated link</a>

@@ -6,6 +6,8 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
+use Yajra\DataTables\Contracts\DataTable;
+
 
 class UserController extends Controller
 {
@@ -23,7 +25,9 @@ class UserController extends Controller
 
     public function index()
     {
-        //
+        $users = User::all();
+
+        return view('staff.list_staff', compact('users'));
     }
 
     /**
