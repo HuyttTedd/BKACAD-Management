@@ -23,9 +23,9 @@
                     <label for="" class="col-sm-2 col-form-label">Ngành</label>
                     <div class="col-sm-8">
                         @foreach ($majors as $major)
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" name="major[]" value="{{ $major->id }}">
-                            <label class="form-check-label" for="">{{ $major->major_name }}</label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="major[]" value="{{ $major->id }}">
+                                <label class="form-check-label" for="">{{ $major->major_name }}</label>
                             </div>
                         @endforeach
                     </div>

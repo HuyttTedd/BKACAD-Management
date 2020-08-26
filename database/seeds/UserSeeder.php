@@ -24,9 +24,9 @@ class UserSeeder extends Seeder
             'password' => bcrypt('12345678')
         ]);
 
-        $role = Role::create(['name' => 'admin']);
+        $role = Role::create(['name' => 'admin', 'description' => 'Quản Trị Viên']);
 
-        $user->assignRole($role);
+        $user->assignRole('admin');
 
     }
 }

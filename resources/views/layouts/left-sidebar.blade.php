@@ -55,6 +55,7 @@
                         <li><a href="{{ route('them_nganh') }}">Thêm Ngành</a></li>
                         <li><a href="{{ route('them_nganh_cho_khoa') }}">Thêm Ngành Cho Khóa</a></li>
                         <li><a href="{{ route('them_mon') }}">Thêm Môn</a></li>
+                        <li><a href="{{ route('them_mon_cho_nganh') }}">Thêm Môn Cho Ngành</a></li>
                     </ul>
                 </li>
 

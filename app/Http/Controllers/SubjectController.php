@@ -41,6 +41,8 @@ class SubjectController extends Controller
         $validateData = $request->validate([
             'subject_id' => ['required', 'unique:subjects,id'],
             'subject_name' => ['required'],
+            'total_time' => ['required'],
+            'test_type' => ['required']
         ]);
 
         DB::beginTransaction();
@@ -48,7 +50,9 @@ class SubjectController extends Controller
         try {
             $subject = Subject::create([
                 'id' => $request->subject_id,
-                'subject_name' => $request->subject_name
+                'subject_name' => $request->subject_name,
+                'total_time' => $request->total_time,
+                'test_type' => $request->test_type
             ]);
 
             DB::commit();

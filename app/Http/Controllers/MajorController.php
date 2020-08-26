@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Major;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Course;
+use App\Models\Subject;
 
 class MajorController extends Controller
 {
@@ -31,6 +33,29 @@ class MajorController extends Controller
 
     }
 
+    public function viewAddSubjectToMajor()
+    {
+        $courses = \App\Models\Course::all();
+        $subjects = Subject::all();
+        return view('subject.add_subject_to_major', compact(['courses', 'subjects']));
+    }
+
+    public function addSubjectToMajor(Request $request)
+    {
+        $course = Course::find($request->course);
+        $major = $course->majors->find($request->major);
+
+        $major->subjects()->sync($request->subject);
+    }
+
+    public function showCourseMajor(Request $request)
+	{
+		if ($request->ajax()) {
+			$majors = Course::find($request->course_id)->majors;
+
+			return response()->json($majors);
+		}
+	}
     /**
      * Store a newly created resource in storage.
      *

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCourseMajorSubjectsTable extends Migration
+class CreateMajorSubjectsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,14 @@ class CreateCourseMajorSubjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('course_major_subjects', function (Blueprint $table) {
-            $table->integer('course_id')->unsigned();
+        Schema::create('major_subjects', function (Blueprint $table) {
             $table->string('major_id');
             $table->string('subject_id');
 
-            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
             $table->foreign('major_id')->references('id')->on('majors')->onDelete('cascade');
             $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
 
-            $table->primary(array('course_id', 'major_id'));
+            $table->primary(array('subject_id', 'major_id'));
         });
     }
 
@@ -33,6 +31,6 @@ class CreateCourseMajorSubjectsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('course_major_subjects');
+        Schema::dropIfExists('major_subjects');
     }
 }

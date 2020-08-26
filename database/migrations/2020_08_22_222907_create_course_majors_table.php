@@ -19,6 +19,8 @@ class CreateCourseMajorsTable extends Migration
 
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
             $table->foreign('major_id')->references('id')->on('majors')->onDelete('cascade');
+
+            $table->primary(array('course_id', 'major_id'));
         });
     }
 
