@@ -89,6 +89,12 @@ Route::group(['prefix' => 'dashboard'], function () {
 
         });
 
+        Route::group(['prefix' => 'assignment'], function () {
+            Route::get('/', 'AssignmentController@phan_cong')->name('phan_cong');
+        });
+
+
+
         Route::group(['prefix' => 'student'], function () {
             Route::get('/import_student', 'StudentController@import')->name('nhap_sinh_vien');
             Route::post('/process_import_student', 'StudentController@storeImport')->name('xu_li_nhap_sinh_vien');
@@ -96,8 +102,11 @@ Route::group(['prefix' => 'dashboard'], function () {
     });
 });
 
-Route::group(['middleware' => ['role:super-admin', 'permission:publish articles']], function () {
-    //
+
+Route::group(['middleware' => ['role:lecturer|admin|ministry']], function () {
+    Route::group(['prefix' => 'lecturer'], function () {
+        Route::get('/attendance', 'AttendanceController@index')->name('diem_danh');
+    });
 });
 
 Route::group(['middleware' => ['role_or_permission:super-admin|edit articles']], function () {

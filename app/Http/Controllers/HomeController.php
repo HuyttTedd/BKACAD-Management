@@ -25,8 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // return view('home');
-        return auth()->user();
+        return view('home');
+        //dd(auth()->user()->hasRole('lecturer'));
+        //ministry
 
     }
 }

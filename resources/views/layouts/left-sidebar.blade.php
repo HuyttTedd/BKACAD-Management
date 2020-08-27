@@ -60,7 +60,7 @@
                 </li>
 
                 <li>
-                    <a href="calendar.html" class="waves-effect"><i class="dripicons-calendar"></i><span> Điểm Danh
+                    <a href="{{ route('diem_danh') }}" class="waves-effect"><i class="dripicons-calendar"></i><span> Điểm Danh
                         </span></a>
                 </li>
 
@@ -69,6 +69,7 @@
                     </span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                     <ul class="list-unstyled">
                         <li><a href="{{ route('nhap_sinh_vien') }}">Nhập Sinh Viên</a></li>
+                        <li><a href="{{ route('phan_cong') }}">Phân Công Dạy Học</a></li>
                         <li><a href="form-validation.html">Form Validation</a></li>
                         <li><a href="form-advanced.html">Form Advanced</a></li>
                         <li><a href="form-editors.html">Form Editors</a></li>

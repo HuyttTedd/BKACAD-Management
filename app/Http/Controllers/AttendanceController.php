@@ -14,7 +14,10 @@ class AttendanceController extends Controller
      */
     public function index()
     {
-        //
+        // if(auth()->user()->hasRole('lecturer')) {
+        //     $class = App\Models\Assignment::where
+        // }
+        // return view('attendance.view_attendance');
     }
 
     /**
