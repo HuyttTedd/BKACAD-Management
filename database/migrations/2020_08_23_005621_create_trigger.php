@@ -13,21 +13,29 @@ class CreateTrigger extends Migration
      */
     public function up()
     {
+        // DB::unprepared('
+        // CREATE TRIGGER staff_auto BEFORE INSERT ON users
+        // FOR each ROW
+        // BEGIN
+        //    SET NEW.id = getNextCustomSeq("user","BKS");
+        // END
+        // ');
+
+        // DB::unprepared('
+        // CREATE TRIGGER student_auto BEFORE INSERT ON students
+        // FOR each ROW
+        // BEGIN
+        //    SET NEW.id = getNextCustomSeq("student","BKA");
+        // END
+        // ');
         DB::unprepared('
-        CREATE TRIGGER staff_auto BEFORE INSERT ON users
+        CREATE TRIGGER room_auto BEFORE INSERT ON classes
         FOR each ROW
         BEGIN
-           SET NEW.id = getNextCustomSeq("user","BKS");
+           SET NEW.id = getNextCustomSeq("room","BKR");
         END
         ');
 
-        DB::unprepared('
-        CREATE TRIGGER student_auto BEFORE INSERT ON students
-        FOR each ROW
-        BEGIN
-           SET NEW.id = getNextCustomSeq("student","BKA");
-        END
-        ');
 
     }
 

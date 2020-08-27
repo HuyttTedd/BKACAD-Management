@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Student extends Model
 {
     protected $table = 'students';
 
     protected $fillable = [
-        'fullname', 'dob', 'gender', 'phone', 'email', 'password'
+        'fullname', 'dob', 'gender', 'phone', 'email', 'password', 'status'
     ];
 
     protected $hidden = [
@@ -18,18 +19,9 @@ class Student extends Model
 
     protected $keyType = 'string';
 
-    public function classes()
+    public function classes(): BelongsToMany
     {
-        return $this->belongsTo(\App\Models\Classes::class);
+        return $this->belongsToMany(\App\Models\Classes::class, 'class_students');
     }
 
-    public function subjects()
-    {
-        return $this->belongsToMany(\App\Models\Subject::class);
-    }
-
-    public function majors()
-    {
-        return $this->belongsTo(\App\Models\Major::class);
-    }
 }

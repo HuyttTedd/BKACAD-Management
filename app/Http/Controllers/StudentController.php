@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\Student;
 use Illuminate\Http\Request;
-
+use App\Imports\StudentImport;
+use App\Models\Classes;
+use App\Models\Major;
+use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 class StudentController extends Controller
 {
     /**
@@ -12,6 +17,13 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function import()
+    {
+        $courses = Course::all();
+        return view('student.import_student', compact('courses'));
+    }
+
+
     public function index()
     {
         //
@@ -33,9 +45,26 @@ class StudentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storeImport(Request $request)
     {
-        //
+        // Excel::import(new StudentImport, $request->file('file'));
+        $studentPerClass = 40;
+        $studentNoClass = DB::select('select count(id) as total_student from students where id not in(select student_id from class_students)');
+
+        $course = $request->course;
+        $major = $request->major;
+
+        $totalClass = floor($studentNoClass[0]->total_student/$studentPerClass);
+
+        // $major_name = Major::find($major);
+        // $course_name = Course::find($course);
+        // for($i = 1; $i <= $totalClass; $i++){
+        //     Classes::create([
+        //         'class_name' => $major_name->id.'0'.$i.$course_name->course_name,
+        //     ]);
+        // }
+        dd(Classes::all());
+
     }
 
     /**

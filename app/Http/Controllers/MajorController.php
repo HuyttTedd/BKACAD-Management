@@ -35,17 +35,36 @@ class MajorController extends Controller
 
     public function viewAddSubjectToMajor()
     {
-        $courses = \App\Models\Course::all();
+        $majors = Major::all();
         $subjects = Subject::all();
-        return view('subject.add_subject_to_major', compact(['courses', 'subjects']));
+        return view('subject.add_subject_to_major', compact(['majors', 'subjects']));
     }
 
     public function addSubjectToMajor(Request $request)
     {
-        $course = Course::find($request->course);
-        $major = $course->majors->find($request->major);
+        $major = Major::find($request->course);
 
-        $major->subjects()->sync($request->subject);
+        DB::beginTransaction();
+
+        try {
+            $major->subjects()->sync($request->subject);
+
+            DB::commit();
+            alert()->success('Success!', 'Thêm môn cho ngành thành công');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            alert()->error('Oops..!', 'Đã có lỗi xảy ra. Vui lòng thử lại sau!');
+            return redirect()->back();
+        }
+
+        return redirect()->route('xem_mon_cua_nganh');
+
+    }
+
+    public function showSubjectOfMajor(){
+        $majors = Major::all();
+
+        return view('subject.view_subject_of_major', compact('majors'));
     }
 
     public function showCourseMajor(Request $request)

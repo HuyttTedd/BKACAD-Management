@@ -14,4 +14,9 @@ class Course extends Model
         return $this->belongsToMany(\App\Models\Major::class, 'course_majors');
     }
 
+    public function classes()
+    {
+        return $this->belongsToMany(\App\Models\Classes::class, 'class_courses');
+    }
+
 }

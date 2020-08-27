@@ -70,8 +70,8 @@ Route::group(['prefix' => 'dashboard'], function () {
 
             Route::get('/add_major_to_course', 'CourseController@viewAddMajorToCourse')->name('them_nganh_cho_khoa');
             Route::post('/process_add_major_to_course', 'CourseController@addMajorToCourse')->name('xu_li_them_nganh_cho_khoa');
-
             Route::get('/view_course_detail', 'CourseController@showDetails')->name('khoa_chi_tiet');
+            Route::get('/{id}/update_subject_to_major', 'MajorController@viewUpdateSubjectToMajor')->name('cap_nhap_mon_cho_nganh');
             Route::get('/{id}/update_major_for_course', 'CourseController@viewUpdateMajorToCourse')->name('cap_nhap_nganh_cho_khoa');
 
         });
@@ -83,9 +83,15 @@ Route::group(['prefix' => 'dashboard'], function () {
 
             Route::get('/add_subject_to_major', 'MajorController@viewAddSubjectToMajor')->name('them_mon_cho_nganh');
             Route::post('/process_add_subject_to_major', 'MajorController@addSubjectToMajor')->name('xu_li_them_mon_cho_nganh');
+            Route::get('/view_subject_of_major', 'MajorController@showSubjectOfMajor')->name('xem_mon_cua_nganh');
 
             Route::post('/showCourseMajor', 'MajorController@showCourseMajor')->name('show_course_major');
 
+        });
+
+        Route::group(['prefix' => 'student'], function () {
+            Route::get('/import_student', 'StudentController@import')->name('nhap_sinh_vien');
+            Route::post('/process_import_student', 'StudentController@storeImport')->name('xu_li_nhap_sinh_vien');
         });
     });
 });

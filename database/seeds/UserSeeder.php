@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
 
         $role = Role::create(['name' => 'admin', 'description' => 'Quản Trị Viên']);
 
-        $user->assignRole('admin');
+        User::get()->first()->assignRole('admin');
 
     }
 }
