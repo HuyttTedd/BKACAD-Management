@@ -90,7 +90,7 @@
                 <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#"
                     role="button" aria-haspopup="false" aria-expanded="false">
                     <img src="{{ asset(auth()->user()->avatar) }}" alt="user" class="rounded-circle">
-                    <span class="d-none d-md-inline-block ml-1">David M. Bailey <i class="mdi mdi-chevron-down"></i>
+                    <span class="d-none d-md-inline-block ml-1">{{ auth()->user()->fullname }}<i class="mdi mdi-chevron-down"></i>
                     </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated profile-dropdown">

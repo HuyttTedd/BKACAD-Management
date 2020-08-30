@@ -14,8 +14,7 @@
         <!-- morris css -->
         {{-- <link rel="stylesheet" href="../plugins/morris/morris.css"> --}}
         <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
-
-
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" type="text/css">

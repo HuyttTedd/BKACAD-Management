@@ -36,6 +36,37 @@ class CreateTrigger extends Migration
         END
         ');
 
+        DB::unprepared('
+        CREATE TRIGGER course_auto BEFORE INSERT ON courses
+        FOR each ROW
+        BEGIN
+           SET NEW.id = getNextCustomSeq("course","K");
+        END
+        ');
+
+
+        DB::unprepared('
+        CREATE TRIGGER attendance_auto BEFORE INSERT ON attendances
+        FOR each ROW
+        BEGIN
+           SET NEW.id = getNextCustomSeq("attendance","BKAT");
+        END
+        ');
+
+        DB::unprepared('
+        CREATE TRIGGER testing_auto BEFORE INSERT ON testing_schedules
+        FOR each ROW
+        BEGIN
+           SET NEW.id = getNextCustomSeq("test","BKTEST");
+        END
+        ');
+        DB::unprepared('
+        CREATE TRIGGER subject_auto BEFORE INSERT ON subjects
+        FOR each ROW
+        BEGIN
+           SET NEW.id = getNextCustomSeq("subject","BKS");
+        END
+        ');
 
     }
 

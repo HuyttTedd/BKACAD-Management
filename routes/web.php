@@ -91,6 +91,10 @@ Route::group(['prefix' => 'dashboard'], function () {
 
         Route::group(['prefix' => 'assignment'], function () {
             Route::get('/', 'AssignmentController@phan_cong')->name('phan_cong');
+            Route::post('/show_phan_cong', 'AssignmentController@ajax_phan_cong')->name('ajax_phan_cong');
+            Route::post('/show_phan_cong1', 'AssignmentController@ajax_phan_cong1')->name('ajax_phan_cong1');
+            Route::post('/process_phan_cong', 'AssignmentController@process_phan_cong')->name('xu_ly_phan_cong');
+            //Route::get('/view_all_phan_cong', 'AssignmentController@view_all_phan_cong')->name('view_all_phan_cong');
         });
 
 
@@ -105,7 +109,12 @@ Route::group(['prefix' => 'dashboard'], function () {
 
 Route::group(['middleware' => ['role:lecturer|admin|ministry']], function () {
     Route::group(['prefix' => 'lecturer'], function () {
-        Route::get('/attendance', 'AttendanceController@index')->name('diem_danh');
+        Route::get('/attendance', 'AttendanceController@diem_danh')->name('diem_danh');
+        Route::post('/ajax_attendance', 'AttendanceController@ajax_diem_danh')->name('ajax_diem_danh');
+        Route::post('/ajax_attendance2', 'AttendanceController@ajax_diem_danh2')->name('ajax_diem_danh2');
+
+        Route::post('/process_attendance', 'AttendanceController@process_diem_danh')->name('process_diem_danh');
+
     });
 });
 

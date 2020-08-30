@@ -14,7 +14,7 @@ class CreateCourseMajorsTable extends Migration
     public function up()
     {
         Schema::create('course_majors', function (Blueprint $table) {
-            $table->integer('course_id')->unsigned();
+            $table->string('course_id');
             $table->string('major_id');
 
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');

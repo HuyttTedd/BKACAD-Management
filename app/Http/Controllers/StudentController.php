@@ -45,27 +45,35 @@ class StudentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function storeImport(Request $request)
+    public function storeImport(Request $rq)
     {
-        // Excel::import(new StudentImport, $request->file('file'));
-        $studentPerClass = 40;
-        $studentNoClass = DB::select('select count(id) as total_student from students where id not in(select student_id from class_students)');
+        $this->validate($rq, [
+            'file'  => 'required|mimes:xls,xlsx',
+            'course' => 'required',
+            'major' => 'required',
+            'total' => 'required',
+            'each' => 'required',
+        ]);
 
-        $course = $request->course;
-        $major = $request->major;
+        $course_id = $rq->course;
+        $major_id = $rq->major;
+        $total = $rq->total;
+        $each = $rq->each;
+        $course_name = Course::findOrFail($course_id)->name;
+        $data = [
+            'course_id' => $course_id,
+            'major_id' => $major_id,
+            'total' => $total,
+            'each' => $each,
+            'course_name' => $course_name,
+        ];
 
-        $totalClass = floor($studentNoClass[0]->total_student/$studentPerClass);
+        Excel::import(new StudentImport($data),request()->file('file'));
 
-        // $major_name = Major::find($major);
-        // $course_name = Course::find($course);
-        // for($i = 1; $i <= $totalClass; $i++){
-        //     Classes::create([
-        //         'class_name' => $major_name->id.'0'.$i.$course_name->course_name,
-        //     ]);
-        // }
-        dd(Classes::all());
-
+        return redirect()->route('dashboard');
     }
+
+
 
     /**
      * Display the specified resource.

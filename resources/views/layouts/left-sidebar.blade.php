@@ -51,11 +51,16 @@
                             Học Viện
                         </span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                     <ul class="list-unstyled">
+                        <li><a href="{{ route('xem_khoa') }}">Xem các khóa học</a></li>
+                        <li><a href="{{ route('xem_nganh') }}">Xem các ngành học</a></li>
+                        <li><a href="{{ route('xem_mon') }}">Xem các môn học</a></li>
                         <li><a href="{{ route('them_khoa') }}">Thêm Khóa</a></li>
                         <li><a href="{{ route('them_nganh') }}">Thêm Ngành</a></li>
                         <li><a href="{{ route('them_mon') }}">Thêm Môn</a></li>
                         <li><a href="{{ route('them_nganh_cho_khoa') }}">Thêm Ngành Cho Khóa</a></li>
                         <li><a href="{{ route('them_mon_cho_nganh') }}">Thêm Môn Cho Ngành</a></li>
+                        <li><a href="{{ route('phan_cong') }}">Phân Công Dạy Học</a></li>
+                        {{-- <li><a href="{{ route('view_all_phan_cong') }}">Xem phân công</a></li> --}}
                     </ul>
                 </li>
 
@@ -69,7 +74,7 @@
                     </span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                     <ul class="list-unstyled">
                         <li><a href="{{ route('nhap_sinh_vien') }}">Nhập Sinh Viên</a></li>
-                        <li><a href="{{ route('phan_cong') }}">Phân Công Dạy Học</a></li>
+
                         <li><a href="form-validation.html">Form Validation</a></li>
                         <li><a href="form-advanced.html">Form Advanced</a></li>
                         <li><a href="form-editors.html">Form Editors</a></li>

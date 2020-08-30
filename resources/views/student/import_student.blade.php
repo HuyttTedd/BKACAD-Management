@@ -29,11 +29,24 @@
                     </div>
                 </div>
                 <div class="form-group row">
+                    <label for="" class="col-sm-2 col-form-label">Nhập Tổng Sinh Viên Cần Thêm</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" name="total">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="" class="col-sm-2 col-form-label">Nhập Số Sinh Viên Mỗi Lớp</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" name="each">
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label for="" class="col-sm-2 col-form-label">Nhập Sinh Viên</label>
                     <div class="col-sm-8 form-control-file">
                         <input type="file" name="file">
                     </div>
                 </div>
+
                 <div class="form-group row">
                     <div class="col-sm-8">
                         <button type="submit" class="btn btn-primary">Xác Nhận</button>
@@ -46,6 +59,7 @@
     @push('script')
         <script type="text/javascript">
             var url = "{{ route('show_course_major') }}";
+
             $("select[name='course']").change(function() {
                 var course_id = $(this).val();
                 var token = $("input[name='_token']").val();

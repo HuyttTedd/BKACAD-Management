@@ -74,7 +74,8 @@ class CourseController extends Controller
         $course = Course::find($request->course);
 
         $majors = $request->major;
-
+        // dd($course);
+        //dd($majors);
         DB::beginTransaction();
         try {
             $course->majors()->sync($majors);

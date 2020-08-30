@@ -15,7 +15,11 @@ class CreateClassesTable extends Migration
     {
         Schema::create('classes', function (Blueprint $table) {
             $table->string('id')->primary();
-            $table->string('class_name');
+            $table->string('class_name')->unique();
+            $table->string('course_id');
+            $table->string('major_id');
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+            $table->foreign('major_id')->references('id')->on('majors')->onDelete('cascade');
             $table->timestamps();
         });
     }

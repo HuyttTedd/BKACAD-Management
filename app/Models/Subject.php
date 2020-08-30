@@ -9,7 +9,7 @@ class Subject extends Model
     protected $table = 'subjects';
 
     protected $fillable = [
-        'id', 'subject_name', 'total_time', 'test_type'
+        'subject_name', 'total_time', 'test_type'
     ];
 
     protected $keyType = 'string';

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use App\Models\Classes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -21,7 +21,7 @@ class Student extends Model
 
     public function classes(): BelongsToMany
     {
-        return $this->belongsToMany(\App\Models\Classes::class, 'class_students');
+        return $this->belongsToMany(Classes::class, 'class_students');
     }
 
 }

@@ -20,8 +20,12 @@ class Major extends Model
         return $this->belongsToMany(\App\Models\Subject::class, 'major_subjects');
     }
 
-    public function classesGroup(){
-        return $this->belongsToMany(\App\Models\Classes::class, 'class_course_majors')
-        ->using(\App\Models\Course::class)->withPivot('course_id');
+    public function classes() {
+        return $this->hasMany(Classes::class, 'major_id', 'id');
     }
+
+    // public function classesGroup(){
+    //     return $this->belongsToMany(\App\Models\Classes::class, 'class_course_majors')
+    //     ->using(\App\Models\Course::class)->withPivot('course_id');
+    // }
 }
