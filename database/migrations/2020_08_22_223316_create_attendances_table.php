@@ -17,14 +17,14 @@ class CreateAttendancesTable extends Migration
             $table->string('id')->primary();
             $table->string('lecturer_id');
             $table->string('subject_id');
-            $table->string('class_id');
+            //$table->string('class_id');
             $table->date('date');
             $table->time('time_start');
             $table->time('time_end');
 
             $table->foreign('lecturer_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
-            $table->foreign('class_id')->references('id')->on('classes')->onDelete('cascade');
+            //$table->foreign('class_id')->references('id')->on('classes')->onDelete('cascade');
             $table->timestamps();
         });
     }

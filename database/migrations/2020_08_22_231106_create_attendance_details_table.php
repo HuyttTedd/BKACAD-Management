@@ -16,8 +16,9 @@ class CreateAttendanceDetailsTable extends Migration
         Schema::create('attendance_details', function (Blueprint $table) {
             $table->string('attendance_id');
             $table->string('student_id');
+            $table->string('class_id');
             $table->tinyInteger('status');
-
+            $table->foreign('class_id')->references('id')->on('classes')->onDelete('cascade');
             $table->foreign('attendance_id')->references('id')->on('attendances')->onDelete('cascade');
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
             $table->timestamps();

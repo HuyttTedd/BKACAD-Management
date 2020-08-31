@@ -13,9 +13,9 @@ class Classes extends Model
 
     protected $fillable = ['class_name', 'course_id', 'major_id'];
 
-    public function students(): BelongsToMany
+    public function students()
     {
-        return $this->belongsToMany(\App\Models\Student::class, 'class_students');
+        return $this->belongsToMany(\App\Models\Student::class, 'class_students', 'class_id', 'student_id');
     }
 
     public function majors()

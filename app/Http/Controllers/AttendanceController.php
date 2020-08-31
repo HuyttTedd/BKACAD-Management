@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendance;
+use App\Models\AttendanceDetail;
 use App\Models\ClassStudent;
 use App\Models\Classes;
 use App\Models\Student;
@@ -35,6 +36,8 @@ class AttendanceController extends Controller
             $last_att = Attendance::where('lecturer_id', $id)->orderBy('id', 'DESC')->first();
             $date_time = Carbon::now()->toDateTimeString();
             $get_time = explode(" ", $date_time);
+                        //dd($get_time[1] > $last_att->time_end);
+
             //lay phan cong
             $phan_cong = Assignment::where('lecturer_id', $id)->get();
                                     $arr = array();
@@ -52,31 +55,52 @@ class AttendanceController extends Controller
                     //dd($get_time);
                             return view('attendance.view_attendance', compact('arr', 'id'));
                 } else {
-                            return view('attendance.update_attendance');
+                    $att_detail = AttendanceDetail::where('attendance_id', $last_att->id)->get();
+
+                    return view('attendance.update_attendance', compact('att_detail', 'last_att'));
                 }
             } else {
                             return view('attendance.view_attendance', compact('arr', 'id'));
             }
-
-
         //lấy phân công ra
-
         }
     }
 
     public function process_diem_danh(Request $rq) {
         $date = Carbon::now()->toDateString();
-        Attendance::updateOrCreate([
+
+        $id =  auth()->user()->id;
+        Attendance::create([
             'time_start' => $rq->start,
-            'lecturer_id' => auth()->user()->id,
-            'class_id' => $rq->class_id,
+            'lecturer_id' => $id,
             'date' => $date,
             'subject_id' => $rq->subject_id,
-            ],[
             'time_end' => $rq->end,
         ]
         );
+
+    //đi học :0, muộn: 1; nghỉ: 2; có phép: 3
+    $lastAtt = Attendance::where('lecturer_id', $id)->orderBy('id', 'DESC')->first();
+    $att_id = $lastAtt->id;
+    $class = $rq->class_id;
+        foreach ($class as $val) {
+                $student = Classes::find($val)->students()->get();
+                foreach ($student as $key) {
+                $id = $key->id;
+                $status = $rq->$id;
+                AttendanceDetail::updateOrCreate(
+                    ['attendance_id' => $att_id,
+                    'student_id' => $id,
+                    'class_id' => $val],[
+                    'status' => $status,
+                    ]
+                );
+            }
+        }
+
+        return redirect()->route('diem_danh');
     }
+
 
     public function ajax_diem_danh(Request $rq) {
         if($rq->ajax()) {
@@ -96,24 +120,46 @@ class AttendanceController extends Controller
 
     public function ajax_diem_danh2(Request $rq) {
         if($rq->ajax()) {
-
-            $student = ClassStudent::select('student_id')->whereIn('class_id', $rq->class_id)->get();
+            $classes = $rq->class_id;
+            $subject_id = $rq->subject_id;
+            $subj = Subject::findOrFail($subject_id);
+            $time_total = (int)$subj->total_time;
+            $sessions = (int)$subj->total_time / 4;
+            $student = ClassStudent::select('student_id')->whereIn('class_id', $classes)->get();
             $arr = array();
+            $arr['time_total'] = $time_total;
             foreach ($student as $key) {
-                    $students = Student::find($key->student_id);
-                    array_push($arr, $students);
+                $students = Student::find($key->student_id);
+                $arr[$students->id]['sum'] = 0;
+                $arr[$students->id]['id'] = $students->id;
+                $arr[$students->id]['name'] = $students->fullname;
+                $arr[$students->id]['session'] = $sessions;
+
+        }
+            foreach ($classes as $class_id) {
+                $each_att_id = Attendance::where('subject_id', $subject_id)
+                ->join('attendance_details', 'attendances.id', '=', 'attendance_details.attendance_id')
+                ->where('attendance_details.class_id', $class_id)->get();
+                foreach ($each_att_id as $val) {
+                    if($val->status == 0) {
+                        $count = 0;
+                    } elseif($val->status == 2) {
+                        $count = 1;
+                    } else {
+                        $count = (float)1/3;
+                    }
+                    $arr[$val->student_id]['sum'] += $count;
+                    if($arr[$val->student_id]['sum'] > $time_total * (3/40)) {
+                        $arr[$val->student_id]['color'] = '#cccc00';
+                    } elseif($arr[$val->student_id]['sum'] > $time_total * (1/8)) {
+                        $arr[$val->student_id]['color'] = 'red';
+                    } else {
+                        $arr[$val->student_id]['color'] = 'green';
+                    }
+                }
             }
-// $arr2=[];
-// $a = 0;
-//             foreach ($arr as $key => $value) {
-//                 # code...
-//                 $a++;
-//                 array_push($arr2, $a);
 
-//             }
-
-                return response()->json($arr);
-
+        return response()->json($arr);
     }
 }
 

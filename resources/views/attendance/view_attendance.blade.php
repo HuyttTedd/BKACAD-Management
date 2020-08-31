@@ -33,7 +33,7 @@
 
     {{-- <div id="aaa">asdasdsa</div> --}}
     <div class="btn btn-primary" id="choose_class" onclick="show()">Xác nhận chọn môn và lớp</div>
-
+    <div class="h6 mt-3 mb-3" id="session"></div>
     {{-- Hiện sinh viên --}}
     <table class="table table-sm mt-5" id="student">
     {{-- @foreach ($student as $item)
@@ -120,7 +120,7 @@ function show() {
 
 
 $('#choose_class').click(function(){
-
+var subject_id =$('#subject_id').val();
 var class_id =$('#class_id').val();
 var token = $("input[name='_token']").val();
 
@@ -129,20 +129,29 @@ var token = $("input[name='_token']").val();
     type:'POST',
     data:{
         class_id: class_id,
+        subject_id: subject_id,
         _token: token
     },
     success:function(data){
+        let aa = Object.keys(data).slice(1).reduce((result, key) => {
+                    result[key] = data[key];
+
+                    return result;
+                }, {});
         $('#student').html('');
         $('#student').append(
             "<tr class='bg-primary'>"+
-            "<th>TÊN SINH VIÊN</th>"+
-            "<th colspan='4' class='text-center'>TÌNH TRẠNG ĐI HỌC</th>"+
+            "<th class='h5 font-weight-bold text-center'>TÊN SINH VIÊN</th>"+
+            "<th colspan='4' class='h5 font-weight-bold text-center'>TÌNH TRẠNG ĐI HỌC</th>"+
         "</tr>"
                         );
-        $.each(data, function(key, value) {
+        $('#session').html(
+            "Tổng số giờ học: "+data.time_total+" giờ."
+        );
+        $.each(aa, function(key, value) {
                         $('#student').append(
                         "<tr>"+
-            "<td>"+value.fullname+"</td>"+
+            "<td class='font-weight-bold' style=color:"+value.color+">"+value.name+" ("+Math.round(value.sum * 10)/10+"/"+value.session+")</td>"+
             "<th>Đi học <input type='radio' name="+value.id+" {{ old("+value.id+") == 0 ? 'checked' : '' }} value='0'></th>"+
             "<th>Muộn <input type='radio' name="+value.id+" {{ old("+value.id+") == 1 ? 'checked' : '' }} value='1'></th>"+
             "<th>Nghỉ <input type='radio' name="+value.id+" {{ old("+value.id+") == 2 ? 'checked' : '' }} value='2'></th>"+
