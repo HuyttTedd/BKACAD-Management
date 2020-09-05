@@ -11,7 +11,7 @@ class Assignment extends Model
     protected $keyType = 'string';
     public $timestamps = false;
     protected $fillable = [
-        'class_id', 'subject_id', 'lecturer_id',
+        'class_id', 'subject_id', 'lecturer_id', 'status'
     ];
     // public function classes() {
     //     return $this->hasMany(Classes::class, 'course_id');

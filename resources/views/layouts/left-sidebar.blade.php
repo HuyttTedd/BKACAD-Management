@@ -67,6 +67,10 @@
                 <li>
                     <a href="{{ route('diem_danh') }}" class="waves-effect"><i class="dripicons-calendar"></i><span> Điểm Danh
                         </span></a>
+                    <a href="{{ route('lich_su_diem_danh') }}" class="waves-effect"><i class="dripicons-calendar"></i><span>Lịch sử điểm Danh</span></a>
+
+                    <a href="{{ route('thong_ke_diem_danh') }}" class="waves-effect"><i class="dripicons-calendar"></i><span>Thống kê điểm Danh</span></a>
+
                 </li>
 
                 <li class="has_sub">

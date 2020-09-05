@@ -24,6 +24,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "chosen-js": "^1.8.7",
         "jquey": "0.0.1-security",
         "select-pure": "^0.6.0-alpha.0",
         "slim-select": "^1.26.0"

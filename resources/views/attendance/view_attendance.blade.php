@@ -4,6 +4,7 @@
 @endsection
 
 @section('content')
+
 <form action="{{ route('process_diem_danh') }}" method="POST" onsubmit="return validate()">
     @csrf
 
@@ -23,9 +24,9 @@
     </div>
 
     <div class="form-group row">
-        <label class="col-sm-3 col-form-label" for="class_id">Chọn lớp học (giữ Ctr để chọn)</label>
+        <label class="col-sm-3 col-form-label" for="class_id">Chọn lớp học</label>
         <div class="col-sm-6">
-            <select name="class_id[]" id="class_id" class="form-control" multiple>
+            <select name="class_id[]" id="class_id" class="form-control" multiple="">
 
             </select>
         </div>
@@ -48,7 +49,7 @@
 
     </table>
     <div class="form-group row col-sm-6 text-danger" id="format">
-        Nhập giờ theo format giờ:phút. Ví dụ: 8:00, 01:30, 20:10
+        Nhập giờ theo format "giờ:phút". Ví dụ: 8:00, 01:30, 20:10
     </div>
 
     <div class="form-group row" id="time-start">
@@ -64,7 +65,7 @@
     <div class="form-group row col-sm-6 text-danger" id="error"></div>
 {{-- Submit --}}
     <div>
-        <button type="submit" id="submit"  class="btn btn-primary mt-4" onclick="confirm('Xác nhận điểm danh?')">Xác nhận</button>
+        <button type="submit" id="submit"  class="btn btn-primary mt-4">Xác nhận</button>
     </div>
 
 
@@ -133,7 +134,7 @@ var token = $("input[name='_token']").val();
         _token: token
     },
     success:function(data){
-        let aa = Object.keys(data).slice(1).reduce((result, key) => {
+        let ignore_first = Object.keys(data).slice(2).reduce((result, key) => {
                     result[key] = data[key];
 
                     return result;
@@ -146,9 +147,9 @@ var token = $("input[name='_token']").val();
         "</tr>"
                         );
         $('#session').html(
-            "Tổng số giờ học: "+data.time_total+" giờ."
+            "Tổng số giờ học: "+data.time_total+" giờ.<br>Buổi học thứ: "+data.session+"."
         );
-        $.each(aa, function(key, value) {
+        $.each(ignore_first, function(key, value) {
                         $('#student').append(
                         "<tr>"+
             "<td class='font-weight-bold' style=color:"+value.color+">"+value.name+" ("+Math.round(value.sum * 10)/10+"/"+value.session+")</td>"+
@@ -193,6 +194,7 @@ var token = $("input[name='_token']").val();
     }
 });
 });
+
 </script>
 
 <style>
@@ -201,27 +203,3 @@ var token = $("input[name='_token']").val();
     }
 </style>
 @endsection
-
-{{-- $('#choose_classs').click(function(){
-
-    var class_id =$('#class_id').val();
-    var token = $("input[name='_token']").val();
-
-        $.ajax({
-        url:'{{ route('ajax_diem_danh2') }}',
-        type:'POST',
-        data:{
-            class_id: class_id,
-            _token: token
-        },
-        success:function(data){
-            $('#subject_id').html('');
-            $.each(data, function(key, value) {
-                            $('#subject_id').append(
-                                "<option value=" + value.id + ">" + value.major_name +
-                                "</option>"
-                            );
-                        });
-        }
-    });
-    }); --}}

@@ -13,12 +13,15 @@
 
         <!-- morris css -->
         {{-- <link rel="stylesheet" href="../plugins/morris/morris.css"> --}}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('assets/css/chosen.min.css') }}" rel="stylesheet" type="text/css">
 
+        @yield('library')
     </head>
 
     <body class="fixed-left">
@@ -69,6 +72,12 @@
         <script src="{{ asset('assets/js/waves.js') }}"></script>
         <script src="{{ asset('assets/js/jquery.nicescroll.js') }}"></script>
         <script src="{{ asset('assets/js/jquery.scrollTo.min.js') }}"></script>
+        <script src="{{ asset('assets/js/chosen.jquery.js') }}"></script>
+        <script src="{{ asset('assets/js/chosen.jquery.min.js') }}"></script>
+        <script src="{{ asset('assets/js/chosen.proto.js') }}"></script>
+        <script src="{{ asset('assets/js/chosen.proto.min.js') }}"></script>
+
+
 
         <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 

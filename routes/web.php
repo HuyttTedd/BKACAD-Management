@@ -97,6 +97,11 @@ Route::group(['prefix' => 'dashboard'], function () {
             //Route::get('/view_all_phan_cong', 'AssignmentController@view_all_phan_cong')->name('view_all_phan_cong');
         });
 
+        Route::group(['prefix' => 'attendance'], function () {
+        Route::get('/admin_attendance', 'AttendanceController@thong_ke_diem_danh')->name('thong_ke_diem_danh');
+        Route::get('/admin_view_attendance', 'AttendanceController@admin_view_diem_danh')->name('admin_view_diem_danh');
+
+        });
 
 
         Route::group(['prefix' => 'student'], function () {
@@ -114,6 +119,10 @@ Route::group(['middleware' => ['role:lecturer|admin|ministry']], function () {
         Route::post('/ajax_attendance2', 'AttendanceController@ajax_diem_danh2')->name('ajax_diem_danh2');
 
         Route::post('/process_attendance', 'AttendanceController@process_diem_danh')->name('process_diem_danh');
+        Route::post('/process_update_attendance', 'AttendanceController@process_update_diem_danh')->name('process_update_diem_danh');
+
+        Route::get('/history_attendance', 'AttendanceController@lich_su_diem_danh')->name('lich_su_diem_danh');
+
 
     });
 });
